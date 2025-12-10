@@ -28,6 +28,3 @@ This creates the SQLite database file named schedule.db with the Class, Employer
 
 Command to run in VS terminal: python app.py
 By default, Flask runs on http://127.0.0.1:5000/, and by using the browser open that link to access the application, you should see the main page of the Work Shifts and Class Schedules Tracker.
-
-
-
