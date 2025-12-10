@@ -490,7 +490,7 @@ def summary_download():
     response.headers["Content-Type"] = "application/pdf"
     response.headers["Content-Disposition"] = "attachment; filename=summary.pdf"
     return response
-
+pyth
 
 if __name__ == "__main__":
     app.run(debug=True)
