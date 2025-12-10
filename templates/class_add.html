@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content %}
+
+<h2>Add Class</h2>
+
+<form method="POST">
+  <label>Class name:</label><br />
+  <input type="text" name="name" required /><br /><br />
+
+  <label>Day of week:</label><br />
+  <select name="day_of_week" required>
+    <option>Monday</option>
+    <option>Tuesday</option>
+    <option>Wednesday</option>
+    <option>Thursday</option>
+    <option>Friday</option>
+    <option>Saturday</option>
+    <option>Sunday</option></select
+  ><br /><br />
+
+  <label>Start time:</label><br />
+  <input type="time" name="start_time" required /><br /><br />
+
+  <label>End time:</label><br />
+  <input type="time" name="end_time" required /><br /><br />
+
+  <label>Location:</label><br />
+  <input type="text" name="location" /><br /><br />
+
+  <button type="submit">Save</button>
+</form>
+
+{% endblock %}

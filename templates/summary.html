@@ -1,0 +1,94 @@
+{% extends "base.html" %} {% block content %}
+<h2>Work Summary</h2>
+
+<button class="no-print" onclick="window.print()" style="margin-bottom: 1rem">
+  Download this summary as PDF
+</button>
+
+<style>
+  .summary-table {
+    border-collapse: collapse;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  .summary-table th,
+  .summary-table td {
+    border: 1px solid #444;
+    padding: 6px 10px;
+    text-align: left;
+  }
+</style>
+
+<form
+  class="no-print"
+  method="POST"
+  style="display: inline-block; margin-right: 1rem"
+>
+  <label>Start date:</label>
+  <input
+    type="date"
+    name="start_date"
+    value="{{ start_date if start_date else '' }}"
+  />
+
+  <label style="margin-left: 1rem">End date:</label>
+  <input
+    type="date"
+    name="end_date"
+    value="{{ end_date if end_date else '' }}"
+  />
+
+  <button type="submit" style="margin-left: 1rem">Apply</button>
+</form>
+
+<h3>Overall totals{% if start_date or end_date %} (filtered){% endif %}</h3>
+
+<p>
+  <strong>Total hours:</strong> {{ '%.2f' % total_hours }} hours<br />
+  <strong>Total earnings:</strong> ${{ '%.2f' % total_earnings }}
+</p>
+
+<h3>By employer</h3>
+{% if employer_stats %}
+<table class="summary-table">
+  <tr>
+    <th>Employer</th>
+    <th>Hours</th>
+    <th>Earnings</th>
+  </tr>
+  {% for row in employer_stats %}
+  <tr>
+    <td>{{ row.name }}</td>
+    <td>{{ '%.2f' % row.hours }}</td>
+    <td>${{ '%.2f' % row.earnings }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No shifts in this period.</p>
+{% endif %}
+
+<h3>Shifts included</h3>
+{% if shifts %}
+<table class="summary-table">
+  <tr>
+    <th>Date</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Employer</th>
+    <th>Assigned position</th>
+  </tr>
+  {% for s in shifts %}
+  <tr>
+    <td>{{ s.date }}</td>
+    <td>{{ s.start_time }}</td>
+    <td>{{ s.end_time }}</td>
+    <td>{{ s.employer.name }}</td>
+    <td>{{ s.notes }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No shifts to display for this period.</p>
+{% endif %} {% endblock %}

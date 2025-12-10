@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+<h2>Schedule Conflicts</h2>
+<button class="no-print" onclick="window.print()" style="margin-bottom: 1rem">
+  Download this report as PDF
+</button>
+
+<style>
+  .conflict-table {
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  .conflict-table th,
+  .conflict-table td {
+    border: 1px solid #444;
+    padding: 6px 10px;
+    text-align: left;
+  }
+  .conflict-row {
+    background-color: #ffe0e0;
+  }
+  .no-conflicts {
+    color: #2b7a0b;
+    font-weight: bold;
+  }
+</style>
+
+<h3>Class vs Shift Conflicts</h3>
+
+{% if class_conflicts %}
+<table class="conflict-table">
+  <tr>
+    <th>Shift date</th>
+    <th>Shift time</th>
+    <th>Employer</th>
+    <th>Assigned position</th>
+    <th>Class</th>
+    <th>Class day & time</th>
+    <th>Class location</th>
+  </tr>
+
+  {% for item in class_conflicts %}
+  <tr class="conflict-row">
+    <td>{{ item.shift.date }}</td>
+    <td>{{ item.shift.start_time }} – {{ item.shift.end_time }}</td>
+    <td>{{ item.shift.employer.name }}</td>
+    <td>{{ item.shift.notes }}</td>
+    <td>{{ item.cls.name }}</td>
+    <td>
+      {{ item.cls.day_of_week }} {{ item.cls.start_time }} – {{
+      item.cls.end_time }}
+    </td>
+    <td>{{ item.cls.location }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="no-conflicts">No conflicts between classes and shifts 🎉</p>
+{% endif %}
+
+<hr />
+
+<h3>Shift vs Shift Conflicts (even across employers)</h3>
+
+{% if shift_conflicts %}
+<table class="conflict-table">
+  <tr>
+    <th>Date</th>
+    <th>Shift 1 time</th>
+    <th>Shift 1 employer</th>
+    <th>Shift 1 assigned position</th>
+    <th>Shift 2 time</th>
+    <th>Shift 2 employer</th>
+    <th>Shift 2 assigned position</th>
+  </tr>
+
+  {% for pair in shift_conflicts %}
+  <tr class="conflict-row">
+    <td>{{ pair.s1.date }}</td>
+    <td>{{ pair.s1.start_time }} – {{ pair.s1.end_time }}</td>
+    <td>{{ pair.s1.employer.name }}</td>
+    <td>{{ pair.s1.notes }}</td>
+
+    <td>{{ pair.s2.start_time }} – {{ pair.s2.end_time }}</td>
+    <td>{{ pair.s2.employer.name }}</td>
+    <td>{{ pair.s2.notes }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="no-conflicts">No overlapping shifts found 🎉</p>
+{% endif %} {% endblock %}
