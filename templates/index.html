@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Dashboard</h2>
+
+  <p>Welcome! This is your schedule tracker.</p>
+
+  <div class="stats">
+    <p><strong>Total classes:</strong> {{ num_classes }}</p>
+    <p><strong>Total employers:</strong> {{ num_employers }}</p>
+    <p><strong>Total shifts:</strong> {{ num_shifts }}</p>
+  </div>
+
+{% endblock %}

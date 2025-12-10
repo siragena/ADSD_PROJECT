@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Edit Class</h2>
+
+  <form method="POST">
+
+    <label>Class name:</label><br>
+    <input type="text" name="name" value="{{ c.name }}" required><br><br>
+
+    <label>Day of week:</label><br>
+    <select name="day_of_week" required>
+      {% for day in ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+        <option value="{{ day }}" {% if c.day_of_week == day %}selected{% endif %}>
+          {{ day }}
+        </option>
+      {% endfor %}
+    </select><br><br>
+
+    <label>Start time:</label><br>
+    <input type="time" name="start_time" value="{{ c.start_time }}" required><br><br>
+
+    <label>End time:</label><br>
+    <input type="time" name="end_time" value="{{ c.end_time }}" required><br><br>
+
+    <label>Location:</label><br>
+    <input type="text" name="location" value="{{ c.location }}"><br><br>
+
+    <button type="submit">Save changes</button>
+  </form>
+{% endblock %}

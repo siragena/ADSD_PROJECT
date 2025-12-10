@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shift & Class Schedule Tracker</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+      }
+      header {
+        margin-bottom: 1.5rem;
+      }
+      nav a {
+        margin-right: 1rem;
+        text-decoration: none;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      .stats {
+        margin-top: 1rem;
+      }
+
+      @media print {
+        nav,
+        .no-print {
+          display: none !important;
+        }
+
+        body {
+          margin: 1cm;
+          font-size: 12pt;
+        }
+
+        header h1 {
+          font-size: 18pt;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>SHIFTS AND CLASSES SCHEDULE TRACKER</h1>
+
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('list_employers') }}">Employers</a>
+        <a href="{{ url_for('list_classes') }}">Classes</a>
+        <a href="{{ url_for('list_shifts') }}">Shifts</a>
+        <a href="{{ url_for('view_conflicts') }}">Conflicts</a>
+        <a href="{{ url_for('summary') }}">Summary</a>
+      </nav>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+  </body>
+</html>

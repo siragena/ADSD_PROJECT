@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Edit Shift</h2>
+
+  <form method="POST">
+
+    <label>Employer:</label><br>
+    <select name="employer_id" required>
+      {% for e in employers %}
+        <option value="{{ e.id }}"
+          {% if e.id == shift.employer.id %}selected{% endif %}>
+          {{ e.name }} ({{ e.hourly_rate }} /hr)
+        </option>
+      {% endfor %}
+    </select><br><br>
+
+    <label>Date:</label><br>
+    <input type="date" name="date" value="{{ shift.date }}" required><br><br>
+
+    <label>Start time:</label><br>
+    <input type="time" name="start_time" value="{{ shift.start_time }}" required><br><br>
+
+    <label>End time:</label><br>
+    <input type="time" name="end_time" value="{{ shift.end_time }}" required><br><br>
+
+   <label>Assigned position:</label><br>
+<textarea name="notes" rows="3" cols="30">{{ shift.notes }}</textarea><br><br>
+
+
+
+    <button type="submit">Save changes</button>
+  </form>
+{% endblock %}

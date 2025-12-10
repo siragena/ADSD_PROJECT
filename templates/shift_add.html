@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Add Shift</h2>
+
+  <form method="POST">
+
+    <label>Employer:</label><br>
+    <select name="employer_id" required>
+      <option value="">-- choose employer --</option>
+      {% for e in employers %}
+        <option value="{{ e.id }}">{{ e.name }} ({{ e.hourly_rate }} /hr)</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label>Date:</label><br>
+    <input type="date" name="date" required><br><br>
+
+    <label>Start time:</label><br>
+    <input type="time" name="start_time" required><br><br>
+
+    <label>End time:</label><br>
+    <input type="time" name="end_time" required><br><br>
+
+    <label>Assigned position:</label><br>
+<textarea name="notes" rows="3" cols="30"></textarea><br><br>
+
+
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}
